@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+@theme {
+  --color-brand: #0ea5e9;
+  --font-display: "Outfit", sans-serif;
+}
