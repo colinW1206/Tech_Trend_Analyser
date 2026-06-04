@@ -4,7 +4,9 @@ export default function Navbar() {
         { name: "Home", href: '#' },
         { name: "Archive", href: '#' },
         { name: "About", href: '#' },
-    ]
+    ];
+
+    const linkClass = "text-slate-200 hover:text-amber-300 font-medium text-sm transition-colors duration-200 cursor-pointer";
 
     return(
 
@@ -23,9 +25,15 @@ export default function Navbar() {
             </div>
 
             <div className="space-x-12">
-                <a>Home</a>
-                <a>Archive</a>
-                <a>About</a>
+                {links.map((link) => (
+                    <a
+                        key={link.name}
+                        href={link.href}
+                        className={linkClass}
+                    >
+                        {link.name}
+                    </a>
+                ))}
             </div>
 
         </div>
