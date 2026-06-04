@@ -18,6 +18,8 @@ export default function Navbar() {
             justify-between
             items-center
             bg-amber-600
+            border-b-2
+            border-amber-700
         '>
 
             <div className="">
