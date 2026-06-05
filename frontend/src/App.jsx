@@ -1,11 +1,11 @@
 import Navbar from './components/Navbar'
-import ContentContainer from './components/ContentContainer'
+import Dashboard from './components/Dashboard'
 
 export default function App() {
   return (
     <div className="min-h-screen bg-slate-400">
       <Navbar />
-      <ContentContainer />
+      <Dashboard />
     </div>
   )
 }

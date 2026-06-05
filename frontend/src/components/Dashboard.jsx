@@ -1,7 +1,7 @@
 import Card from './Card'
 import Footer from './Footer'
 
-export default function ContentContainer() {
+export default function Dashboard() {
 
     return(
 
@@ -16,7 +16,8 @@ export default function ContentContainer() {
                 md:grid-cols-3 gap-6
             '>
                 <Card className="md:col-span-2">
-                    the tech trend of the day
+                    <h1 className="text-xl font-bold">the tech trend of the day</h1>
+                    <p> whatever content </p>
                 </Card>
                 <Card className="md:col-span-1">
                     not sure yet, maybe something for navigation? or other info
