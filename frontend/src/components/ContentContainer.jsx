@@ -16,6 +16,9 @@ export default function ContentContainer() {
                 <Card className="md:col-span-2">
                     aaa
                 </Card>
+                <Card className="md:col-span-1">
+                    aaa
+                </Card>
             </div>
 
         </main>
