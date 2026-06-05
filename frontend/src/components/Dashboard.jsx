@@ -1,5 +1,4 @@
 import Card from './Card'
-import Footer from './Footer'
 
 export default function Dashboard() {
 
@@ -16,18 +15,15 @@ export default function Dashboard() {
                 md:grid-cols-3 gap-6
             '>
                 <Card className="md:col-span-2">
-                    <h1 className="text-xl font-bold">the tech trend of the day</h1>
+                    <h1 className="text-xl font-bold">
+                        the tech trend of the day + a timer to show when it will refresh automatically
+                    </h1>
                     <p> whatever content </p>
                 </Card>
                 <Card className="md:col-span-1">
                     not sure yet, maybe something for navigation? or other info
                 </Card>
 
-                <Footer className="
-                    md:col-span-3
-                ">
-                    aaaaa
-                </Footer>
             </div>
 
         </main>
