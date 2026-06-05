@@ -1,4 +1,4 @@
-export default function Navbar() {
+export default function Navbar( {pageChangeCallback} ) {
 
     const links = [
         { name: "Home", href: '#' },
@@ -32,6 +32,7 @@ export default function Navbar() {
                         key={link.name}
                         href={link.href}
                         className={linkClass}
+                        onClick={() => pageChangeCallback(link.name)}
                     >
                         {link.name}
                     </a>

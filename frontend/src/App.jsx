@@ -1,12 +1,25 @@
+import { useState } from 'react'
+
 import Navbar from './components/Navbar'
 import Dashboard from './components/Dashboard'
+import Archive from './components/Archive'
 import Footer from './components/Footer'
 
 export default function App() {
+
+  const [page, setPage] = useState('Home');
+
+  function handlePageChange(page) {
+    setPage(page);
+  }
+
   return (
     <div className="min-h-screen bg-slate-400">
-      <Navbar />
-      <Dashboard />
+      <Navbar pageChangeCallback = {handlePageChange}/>
+
+      {page === 'Home' && <Dashboard />}
+      {page === 'Archive' && <Dashboard />}
+
       <Footer />
     </div>
   )
