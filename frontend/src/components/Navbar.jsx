@@ -22,8 +22,8 @@ export default function Navbar( {pageChangeCallback} ) {
             border-amber-700
         '>
 
-            <div className="">
-                <p>logo and whatever</p>
+            <div className="text-xl font-bold">
+                <p>(Placeholder for Logo) Tech Trend Analyser</p>
             </div>
 
             <div className="space-x-12">
