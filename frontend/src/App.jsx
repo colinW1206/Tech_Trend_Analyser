@@ -7,7 +7,7 @@ export default function App() {
     <div className="min-h-screen bg-slate-400">
       <Navbar />
       <Dashboard />
-       <Footer />
+      <Footer />
     </div>
   )
 }
