@@ -9,6 +9,28 @@ export default function Dashboard() {
     const activeTrend = mockData[selectedDay];
     const daysList = Object.keys(mockData);
 
+    const renderButton = (day) => {
+        const isActive = selectedDay === day;
+
+        return (
+            <button
+                key={day}
+                onClick={() => setSelectedDay(day)}
+                className={`
+                    w-full px-4 py-3
+                    text-left text-sm
+                    
+                    ${isActive
+                        ? "bg-amber-600 text-white shadow-md" 
+                        : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+                    }
+                `}
+            >
+                {day}
+            </button>
+        );
+    }
+
     return(
 
         <main className='
@@ -35,24 +57,7 @@ export default function Dashboard() {
                     <div className="
                         flex flex-col space-y-3
                     ">
-                        {daysList.map((day) => (
-                            <button
-                                key={day}
-                                onClick={() => setSelectedDay(day)}
-                                className={`
-                                    w-full px-4 py-3
-                                    text-left text-sm
-                                    
-                                    ${selectedDay === day
-                                        ? "bg-amber-600 text-white shadow-md" 
-                                        : "bg-slate-800 text-slate-300 hover:bg-slate-700"
-                                    }
-                                `}
-                            >
-                                {day}
-                            </button>
-                        ))}
-
+                        {daysList.map(renderButton)}
                     </div>
 
                 </Card>
