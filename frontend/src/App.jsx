@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Navbar from './components/Navbar'
 import Dashboard from './components/Dashboard'
 import Archive from './components/Archive'
+import About from './components/About'
 import Footer from './components/Footer'
 
 export default function App() {
@@ -18,7 +19,8 @@ export default function App() {
       <Navbar pageChangeCallback = {handlePageChange}/>
 
       {page === 'Home' && <Dashboard />}
-      {page === 'Archive' && <Dashboard />}
+      {page === 'Archive' && <Archive />}
+      {page === 'About' && <About />}
 
       <Footer />
     </div>
