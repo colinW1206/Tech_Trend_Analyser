@@ -1,5 +1,21 @@
+from sqlmodel import Session
+from backend.app.database import engine, Story
+
 import requests
 import time
+
+with Session(engine) as session:
+    db_story = Story(
+        #id=story_id,
+        #title=title,
+        #url=url,
+        #score=score,
+        #by=author,
+        #time=time_posted
+    )
+
+    session.add(db_story)
+    session.commit()
 
 top_stories_url = "https://hacker-news.firebaseio.com/v0/topstories.json"
 response = requests.get(top_stories_url)
