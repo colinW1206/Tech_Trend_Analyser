@@ -23,16 +23,27 @@ for story_id in top_10_ids:
 
 
     with Session(engine) as session:
-        db_story = Story(
-            id=story_id,
-            title=title,
-            url=url,
-            score=score,
-            by=author,
-            time=time_posted
-        )
 
-    session.add(db_story)
-    session.commit()
+        existing_story = session.get(Story, story_id)
+
+        if not existing_story:
+            db_story = Story(
+                id=story_id,
+                title=title,
+                url=url,
+                score=score,
+                by=author,
+                time=time_posted
+            )
+
+            session.add(db_story)
+            session.commit()
+            print(f"Added new story: {title}.")
+
+        else:
+            existing_story.score = score
+            session.add(existing_story)
+            session.commit()
+            print(f"Updated score for: {title}.")
 
     time.sleep(1)
