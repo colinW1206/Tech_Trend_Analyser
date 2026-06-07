@@ -35,3 +35,6 @@ database.db
 *.db
 *.sqlite
 *.sqlite3
+
+# CrewAI cache
+.crewai/
