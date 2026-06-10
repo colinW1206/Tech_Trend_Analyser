@@ -1,17 +1,25 @@
-research_task:
+identify_trends_task:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is {current_year}.
+    Analyse the following selection of Hacker News articles and their full content:
+    
+    {stories}
+    
+    Review the titles, upvote scores, and full article contents. Identify the 3 to 5 most 
+    significant technological trends, major product launches, or system engineering shifts 
+    signified by these articles. Filter out noise, spam, and non-technological topics.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    A structured breakdown of the 3-5 main tech trends. For each trend, list the title of the 
+    trend, a brief explanation of why it is trending today, and a list of the contributing 
+    Hacker News story titles.
+  agent: tech_trend_identifier
 
-reporting_task:
+write_summary_task:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Take the identified tech trends and supporting article highlights provided by the 
+    Trend Identifier. Write a cohesive, engaging, and professional daily tech briefing report. 
+    The report should summarize today's state of tech discussions in a clear, newsletter-style 
+    tone (similar to TLDR or the Hacker News newsletter). It should be informative, concise, 
+    and valuable to tech enthusiasts and software developers.
   expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    A fully fledged daily tech briefing report formatted strictly in Markdown.
+  agent: article_writer
