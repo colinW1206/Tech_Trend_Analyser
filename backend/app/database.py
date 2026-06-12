@@ -11,7 +11,7 @@ class Story(SQLModel, table=True):
     time: int
     parsed_content: Optional[str] = None # For the clean markdown
     relevance_score: Optional[int] = None
-    agent_explanation: Optional[str] = None
+    score_explanation: Optional[str] = None
 
 class Summary(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
