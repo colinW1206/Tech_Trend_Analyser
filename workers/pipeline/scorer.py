@@ -51,5 +51,10 @@ with Session(engine) as session:
 
                 print(f"Scored {story.title}: {relevance_score}/10 \n {score_explanation}")
 
+                story.relevance_score = relevance_score
+                story.score_explanation = score_explanation
+                session.add(story)
+                session.commit()
+
             except json.JSONDecodeError:
                 print("Did not get valid JSON object.")
