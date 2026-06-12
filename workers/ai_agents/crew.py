@@ -1,9 +1,7 @@
-from crewai import Agent, Crew, Process, Task
+from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
-# If you want to run a snippet of code before or after the crew starts,
-# you can use the @before_kickoff and @after_kickoff decorators
-# https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
+from dotenv import load_dotenv
 
 @CrewBase
 class Trendanalysercrew():
@@ -11,6 +9,13 @@ class Trendanalysercrew():
 
     agents: list[BaseAgent]
     tasks: list[Task]
+
+    def __init__(self) -> None:
+        self.openrouter_llm = LLM(
+            model=os.getenv("OPENAI_MODEL_NAME"),
+            base_url=os.getenv("OPENAI_API_BASE"),
+            api_key=os.getenv("OPENROUTER_API_KEY")
+        )
 
     # Learn more about YAML configuration files here:
     # Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
