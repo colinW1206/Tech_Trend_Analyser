@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "crewai[tools]==1.10.1",
+    "crewai[litellm,tools]==1.10.1",
     "fastapi>=0.136.3",
     "requests>=2.32.5,<2.33.dev0",
     "sqlmodel>=0.0.38",

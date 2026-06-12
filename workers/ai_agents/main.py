@@ -4,7 +4,7 @@ import warnings
 
 from datetime import datetime
 
-from trendanalysercrew.crew import Trendanalysercrew
+from workers.ai_agents.crew import Trendanalysercrew
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
@@ -19,7 +19,8 @@ def run():
     """
     inputs = {
         'topic': 'AI LLMs',
-        'current_year': str(datetime.now().year)
+        'current_year': str(datetime.now().year),
+        'stories': 'Story 1: New AI model released. Story 2: Advances in quantum computing.'
     }
 
     try:
@@ -34,7 +35,8 @@ def train():
     """
     inputs = {
         "topic": "AI LLMs",
-        'current_year': str(datetime.now().year)
+        'current_year': str(datetime.now().year),
+        'stories': 'Story 1: New AI model released. Story 2: Advances in quantum computing.'
     }
     try:
         Trendanalysercrew().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
@@ -58,7 +60,8 @@ def test():
     """
     inputs = {
         "topic": "AI LLMs",
-        "current_year": str(datetime.now().year)
+        "current_year": str(datetime.now().year),
+        'stories': 'Story 1: New AI model released. Story 2: Advances in quantum computing.'
     }
 
     try:
@@ -84,7 +87,8 @@ def run_with_trigger():
     inputs = {
         "crewai_trigger_payload": trigger_payload,
         "topic": "",
-        "current_year": ""
+        "current_year": "",
+        'stories': 'Story 1: New AI model released. Story 2: Advances in quantum computing.'
     }
 
     try:
@@ -92,3 +96,13 @@ def run_with_trigger():
         return result
     except Exception as e:
         raise Exception(f"An error occurred while running the crew with trigger: {e}")
+
+if __name__ == '__main__':
+    if len(sys.argv) > 1 and sys.argv[1] == "train":
+        train()
+    elif len(sys.argv) > 1 and sys.argv[1] == "replay":
+        replay()
+    elif len(sys.argv) > 1 and sys.argv[1] == "test":
+        test()
+    else:
+        run()
