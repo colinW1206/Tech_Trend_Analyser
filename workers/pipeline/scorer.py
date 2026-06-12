@@ -7,6 +7,7 @@ from litellm import completion
 import requests
 import time
 import os
+import json
 
 load_dotenv()
 
@@ -28,15 +29,27 @@ with Session(engine) as session:
 
     for story in recent_stories:
         if story.parsed_content:
-            payload = {f"Article Content:\n{story.parsed_content}"}
+            payload = f"Article Content:\n{story.parsed_content}"
 
             response = completion(
                 model=os.getenv("OPENAI_MODEL_NAME"),
 
                 messages=[
-                    {"role": "system", "content": PROMPT}
-                    {"role": "user", "content": payload}
+                    {"role": "system", "content": PROMPT},
+                    {"role": "user", "content": payload},
                 ],
 
                 response_format={"type": "json_object"}
             )
+
+            output = response.choices[0].message.content
+
+            try:
+                data = json.loads(output)
+                relevance_score = data.get("relevance_score")
+                score_explanation = data.get("score_explanation")
+
+                print(f"Scored {story.title}: {relevance_score}/10 \n {score_explanation}")
+
+            except json.JSONDecodeError:
+                print("Did not get valid JSON object.")
