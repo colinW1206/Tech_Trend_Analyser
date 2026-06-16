@@ -3,6 +3,7 @@ from backend.app.database import engine, Story, Summary
 from workers.ai_agents.crew import Trendanalysercrew
 
 import time
+import datetime
 
 def generate_daily_brief():
     
@@ -18,3 +19,21 @@ def generate_daily_brief():
         )
 
         stories = session.exec(statement).all()
+
+        if not stories:
+            return
+
+        formatted_stories = []
+        for story in stories:
+            formatted_stories.append(
+                f"Title: {story.title} \nURL: {story.url} \nContent:\n{story.parsed_content}\n"
+            )
+
+        stories_input = "\n".join(formatted_stories)
+
+        payload = {
+            'current_time': str(datetime.datetime.now()),
+            'stories': stories_input
+        }
+
+        crew_output = Trendanalysercrew().crew().kickoff(inputs=inputs)
