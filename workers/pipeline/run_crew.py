@@ -4,6 +4,9 @@ from workers.ai_agents.crew import Trendanalysercrew
 
 import time
 import datetime
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def generate_daily_brief():
     
@@ -31,9 +34,22 @@ def generate_daily_brief():
 
         stories_input = "\n".join(formatted_stories)
 
-        payload = {
+        inputs = {
             'current_time': str(datetime.datetime.now()),
             'stories': stories_input
         }
 
         crew_output = Trendanalysercrew().crew().kickoff(inputs=inputs)
+
+        summary = Summary(
+            date=datetime.date.today().isoformat(),
+            summary_title=f"Summary - {datetime.date.today().strftime('%B %d, %Y')}",
+            summary_markdown=str(crew_output)
+        )
+
+        session.add(summary)
+        session.commit()
+        print("Summary generated and saved successfully.")
+
+if __name__ == "__main__":
+    generate_daily_brief()

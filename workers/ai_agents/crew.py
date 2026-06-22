@@ -28,14 +28,16 @@ class Trendanalysercrew():
     def tech_trend_identifier(self) -> Agent:
         return Agent(
             config=self.agents_config['tech_trend_identifier'], # type: ignore[index]
-            verbose=True
+            verbose=True,
+            llm=self.openrouter_llm
         )
 
     @agent
     def article_writer(self) -> Agent:
         return Agent(
             config=self.agents_config['article_writer'], # type: ignore[index]
-            verbose=True
+            verbose=True,
+            llm=self.openrouter_llm
         )
 
     # To learn more about structured task outputs,
