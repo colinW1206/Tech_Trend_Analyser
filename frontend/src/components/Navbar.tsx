@@ -1,4 +1,8 @@
-export default function Navbar( {pageChangeCallback} ) {
+interface NavbarProps {
+    pageChangeCallback: (page: string) => void;
+}
+
+export default function Navbar( {pageChangeCallback}: NavbarProps ) {
 
     const links = [
         { name: "Home", href: '#' },

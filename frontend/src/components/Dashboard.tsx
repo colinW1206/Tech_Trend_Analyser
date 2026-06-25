@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown'
 
 import Card from './Card'
-import { mockData } from '../mockData';
 
 interface Summary {
     id: number;
