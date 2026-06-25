@@ -4,9 +4,16 @@ import ReactMarkdown from 'react-markdown'
 import Card from './Card'
 import { mockData } from '../mockData';
 
+interface Summary {
+    id: number;
+    date: string;
+    summary_title: string;
+    summary_markdown: string;
+}
+
 export default function Dashboard() {
 
-    const [summaries, setSummaries] = useState([]);
+    const [summaries, setSummaries] = useState<Summary[]>([]);
     const [loading, setLoading] = useState(true);
 
     const[selectedIndex, setSelectedIndex] = useState(0);
@@ -21,14 +28,14 @@ export default function Dashboard() {
             .catch(error => console.error("Error fetching summaries:", error));
     }, []);
 
-    const formatDate = (dateString) => {
+    const formatDate = (dateString: string) => {
         return new Date(dateString).toLocaleDateString('en-US', {
             weekday: 'short', month: 'short', day: 'numeric'
         });
     }
 
 
-    const renderButton = (summary, index) => {
+    const renderButton = (summary: Summary, index: number) => {
         const isActive = selectedIndex === index;
         return (
             <button
