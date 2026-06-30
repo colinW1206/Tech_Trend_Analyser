@@ -1,5 +1,4 @@
-from sqlmodel import Session, select
-from backend.app.database import engine, Story
+from backend.app.database import stories_collection
 
 from dotenv import load_dotenv
 from litellm import completion
@@ -22,39 +21,44 @@ PROMPT = """
 
 interval = int(time.time()) - (24 * 60 * 60)
 
-with Session(engine) as session:
-    statement = select(Story).where(Story.time >= interval)
-    
-    recent_stories = session.exec(statement).all()
+query = {
+    "time": {"$gte": interval}
+}
 
-    for story in recent_stories:
-        if story.parsed_content:
-            payload = f"Article Content:\n{story.parsed_content}"
+cursor = stories_collection.find(query)
+recent_stories = list(cursor)
 
-            response = completion(
-                model=os.getenv("OPENAI_MODEL_NAME"),
+for story in recent_stories:
+    if story.get("parsed_content"):
+        payload = f"Article Content:\n{story.get("parsed_content")}"
 
-                messages=[
-                    {"role": "system", "content": PROMPT},
-                    {"role": "user", "content": payload},
-                ],
+        response = completion(
+            model=os.getenv("OPENAI_MODEL_NAME"),
 
-                response_format={"type": "json_object"}
+            messages=[
+                {"role": "system", "content": PROMPT},
+                {"role": "user", "content": payload},
+            ],
+
+            response_format={"type": "json_object"}
+        )
+
+        output = response.choices[0].message.content
+
+        try:
+            data = json.loads(output)
+            relevance_score = data.get("relevance_score")
+            score_explanation = data.get("score_explanation")
+
+            print(f"Scored {story.get("title")}: {relevance_score}/10 \n {score_explanation}")
+
+            stories_collection.update_one(
+                {"_id": story["_id"]},
+                {"$set": {
+                    "relevance_score": relevance_score,
+                    "score_explanation": score_explanation
+                }}
             )
 
-            output = response.choices[0].message.content
-
-            try:
-                data = json.loads(output)
-                relevance_score = data.get("relevance_score")
-                score_explanation = data.get("score_explanation")
-
-                print(f"Scored {story.title}: {relevance_score}/10 \n {score_explanation}")
-
-                story.relevance_score = relevance_score
-                story.score_explanation = score_explanation
-                session.add(story)
-                session.commit()
-
-            except json.JSONDecodeError:
-                print("Did not get valid JSON object.")
+        except json.JSONDecodeError:
+            print("Did not get valid JSON object.")
