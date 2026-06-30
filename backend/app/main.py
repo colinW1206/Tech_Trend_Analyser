@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sqlmodel import Session, select
 
-from backend.app.database import engine, Summary
+from backend.app.database import summaries_collection
 
 app = FastAPI()
 
@@ -17,10 +16,11 @@ app.add_middleware(
 @app.get("/api/summaries")
 def get_summaries():
     
-    with Session(engine) as session:
+    cursor = summaries_collection.find().sort("date", -1)
+    summaries = list(cursor)
 
-        statement = select(Summary).order_by(Summary.date.desc())
+    for summary in summaries:
+        summary["id"] = str(summary["_id"])
+        del summary["_id"]
 
-        summaries = session.exec(statement).all()
-
-        return summaries
+    return summaries
