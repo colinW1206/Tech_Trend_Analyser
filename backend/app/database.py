@@ -1,28 +1,17 @@
-from datetime import datetime, timezone
-from typing import Optional
-from sqlmodel import Field, Session, SQLModel, create_engine
+import os
+from pymongo import MongoClient
+from dotenv import load_dotenv
 
-class Story(SQLModel, table=True):
-    id: int = Field(primary_key=True)
-    title: str
-    url: Optional[str] = None
-    score: int
-    by: str
-    time: int
-    parsed_content: Optional[str] = None # For the clean markdown
-    relevance_score: Optional[int] = None
-    score_explanation: Optional[str] = None
+load_dotenv()
 
-class Summary(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    date: str = Field(unique=True, index=True)
-    summary_title: str
-    summary_markdown: str
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+MONGODB_URI = os.getenv("MONGODB_URI")
 
-sqlite_file_name = "database.db"
-sqlite_url = f"sqlite:///{sqlite_file_name}"
-engine = create_engine(sqlite_url, echo=True)
+if not MONGODB_URI:
+    raise ValueError("No MONGODB_URI found in .env file.")
 
-def create_db_and_tables():
-    SQLModel.metadata.create_all(engine)
+client = MongoClient(MONGODB_URI)
+
+db = client["tech_trend_db"]
+
+stories_collection = db["stories"]
+summaries_collection = db["summaries"]
