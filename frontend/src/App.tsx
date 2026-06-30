@@ -10,7 +10,7 @@ export default function App() {
 
   const [page, setPage] = useState('Home');
 
-  function handlePageChange(page) {
+  function handlePageChange(page: string) {
     setPage(page);
   }
 
