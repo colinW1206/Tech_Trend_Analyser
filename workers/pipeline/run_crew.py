@@ -25,7 +25,7 @@ def generate_daily_brief():
     formatted_stories = []
     for story in stories:
         formatted_stories.append(
-            f"Title: {story.title} \nURL: {story.url} \nContent:\n{story.parsed_content}\n"
+            f"Title: {story.get("title")} \nURL: {story.get("url")} \nContent:\n{story.get("parsed_content")}\n"
         )
 
     stories_input = "\n".join(formatted_stories)
