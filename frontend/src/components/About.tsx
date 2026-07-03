@@ -3,16 +3,10 @@ import Card from './Card'
 export default function About() {
 
     return(
-        <main className="
-            max-w-4xl mx-auto
-            pt-24 px-6 pb-12
-        ">
-            
+        <main className="max-w-4xl mx-auto pt-32 px-6 pb-20">
             <Card>
-                <h1 className="
-                    text-xl font-bold mb-6
-                ">
-                    About TechTrend Analyser
+                <h1 className="text-3xl font-serif font-bold tracking-tight mb-6 text-charcoal">
+                    About TechTrend AI
                 </h1>
             </Card>
 

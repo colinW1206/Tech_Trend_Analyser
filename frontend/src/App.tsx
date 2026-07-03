@@ -15,15 +15,17 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-400">
-      <Navbar pageChangeCallback = {handlePageChange}/>
+    <>
+      <div className="min-h-screen relative z-10 text-charcoal">
+        <Navbar pageChangeCallback={handlePageChange} />
 
-      {page === 'Home' && <Dashboard />}
-      {page === 'Archive' && <Archive />}
-      {page === 'About' && <About />}
+        {page === 'Home' && <Dashboard />}
+        {page === 'Archive' && <Archive />}
+        {page === 'About' && <About />}
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   )
 }
 

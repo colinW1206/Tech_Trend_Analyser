@@ -45,8 +45,8 @@ export default function Dashboard() {
                     text-left text-sm transition-colors
                     
                     ${isActive
-                        ? "bg-amber-600 text-white shadow-md rounded-md" 
-                        : "bg-slate-800 text-slate-300 hover:bg-slate-700 rounded-md"
+                        ? "bg-brand text-white shadow-md border-transparent" 
+                        : "bg-white text-charcoal hover:bg-slate-50 border-gray-200"
                     }
                 `}
             >
@@ -56,11 +56,11 @@ export default function Dashboard() {
     }
 
     if (loading) {
-        return <div className="text-center pt-32 text-white">Loading latest trends...</div>
+        return <div className="text-center pt-32 text-charcoal">Loading latest trends...</div>
     }
 
     if (summaries.length === 0) {
-        return <div className="text-center pt-32 text-white">No trends found in database.</div>
+        return <div className="text-center pt-32 text-charcoal">No trends found in database.</div>
     }
 
     const activeTrend = summaries[selectedIndex];
@@ -69,26 +69,26 @@ export default function Dashboard() {
 
         <main className='
             max-w-7xl mx-auto
-            pt-24 px-6 pb-12
+            pt-32 px-6 pb-20
         '>
             <div className='
                 grid grid-cols-1
                 md:grid-cols-3 gap-6
             '>
 
-                <Card className="md:col-span-2 bg-slate-900 border-slate-800 text-slate-200">
-                    <h1 className="text-3xl font-bold mb-6 pb-4 border-b border-slate-800">
+                <Card className="md:col-span-2">
+                    <h1 className="text-4xl font-serif font-bold tracking-tight mb-8 pb-6 border-b border-gray-200 text-charcoal">
                         {activeTrend.summary_title}
                     </h1>
                     
-                    <div className="prose prose-invert prose-amber max-w-none">
+                    <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:font-bold prose-a:text-brand hover:prose-a:text-brand-light prose-strong:text-charcoal text-charcoal-light leading-relaxed">
                         <ReactMarkdown>{activeTrend.summary_markdown}</ReactMarkdown>
                     </div>
                 </Card>
 
-                <Card className="md:col-span-1 bg-slate-900 border-slate-800">
-                    <h1 className="text-xl font-bold text-white mb-4">
-                        Recent Trends
+                <Card className="md:col-span-1 h-fit sticky top-32">
+                    <h1 className="text-sm font-bold tracking-widest uppercase text-charcoal-light mb-6">
+                        Recent Reports
                     </h1>
                     <div className="flex flex-col space-y-3">
                         {summaries.map((summary, index) => renderButton(summary, index))}

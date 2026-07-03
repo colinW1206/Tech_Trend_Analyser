@@ -10,40 +10,43 @@ export default function Navbar( {pageChangeCallback}: NavbarProps ) {
         { name: "About", href: '#' },
     ];
 
-    const linkClass = "text-slate-200 hover:text-amber-300 font-medium text-sm transition-colors duration-200 cursor-pointer";
+    const linkClass = "text-white/90 hover:text-white font-medium text-sm transition-colors duration-200 cursor-pointer tracking-wide";
 
     return(
 
-        <div className='
+        <nav className='
             fixed top-0 left-0
-            h-16 w-full
-            px-8
+            h-20 w-full
+            px-8 md:px-16
             flex flex-row
-            justify-between
+            justify-end
             items-center
-            bg-amber-600
-            border-b-2
-            border-amber-700
+            bg-brand
+            border-b-4
+            border-brand-dark
+            shadow-md
+            z-50
         '>
-
-            <div className="text-xl font-bold">
-                <p>(Placeholder for Logo) Tech Trend Analyser</p>
+            <div 
+                className="absolute left-1/2 -translate-x-1/2 text-2xl font-serif font-bold tracking-tight text-white cursor-pointer" 
+                onClick={() => pageChangeCallback('Home')}
+            >
+                TechTrend Analyser
             </div>
 
-            <div className="space-x-12">
+            <div className="space-x-8 md:space-x-12 hidden md:flex">
                 {links.map((link) => (
                     <a
                         key={link.name}
                         href={link.href}
                         className={linkClass}
-                        onClick={() => pageChangeCallback(link.name)}
+                        onClick={(e) => { e.preventDefault(); pageChangeCallback(link.name); }}
                     >
                         {link.name}
                     </a>
                 ))}
             </div>
-
-        </div>
+        </nav>
 
     );
 

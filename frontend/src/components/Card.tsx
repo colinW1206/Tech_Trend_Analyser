@@ -8,11 +8,7 @@ interface CardProps {
 export default function Card({ children, className = '' }: CardProps) {
 
     return(
-        <div className={`
-            p-6
-            bg-slate-100
-            ${className}
-        `}>
+        <div className={`p-8 editorial-card editorial-card-hover ${className}`}>
             {children}
         </div>
     );
