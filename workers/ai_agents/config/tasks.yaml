@@ -4,22 +4,44 @@ identify_trends_task:
     
     {stories}
     
-    Review the titles, upvote scores, and full article contents. Identify the 3 to 5 most 
+    Review the titles, URLs, upvote scores, and full article contents. Identify the 3 to 5 most 
     significant technological trends, major product launches, or system engineering shifts 
     signified by these articles. Filter out noise, spam, and non-technological topics.
   expected_output: >
-    A structured breakdown of the 3-5 main tech trends. For each trend, list the title of the 
-    trend, a brief explanation of why it is trending today, and a list of the contributing 
-    Hacker News story titles.
+    A structured breakdown of the 3-5 main tech trends. For each trend, you MUST provide:
+    1. The title of the trend.
+    2. A brief explanation of why it is trending today.
+    3. A list of the contributing Hacker News stories, including their exact titles and URLs.
   agent: tech_trend_identifier
 
 write_summary_task:
   description: >
     Take the identified tech trends and supporting article highlights provided by the 
     Trend Identifier. Write a cohesive, engaging, and professional daily tech briefing report. 
-    The report should summarize today's state of tech discussions in a clear, newsletter-style 
-    tone (similar to TLDR or the Hacker News newsletter). It should be informative, concise, 
-    and valuable to tech enthusiasts and software developers.
+    You must format the report using EXACTLY the following Markdown structure, without deviation:
+
+    ## Overview
+    [A 2-3 sentence executive summary of today's tech climate based on the trends. Begin with "Today's discussion"].
+    
+    ---
+    
+    ## 1. [Trend Title 1]
+    **The Shift:** [One concise sentence summarising the trend]
+    
+    **Developer Impact:** 
+    [Short paragraph explaining why software engineers should care]
+    
+    ---
+    
+    ## 2. [Trend Title 2]
+    ...
+    
+    ---
+    
+    ## Sources
+    - [Story Title 1](Story URL 1)
+    - [Story Title 2](Story URL 2)
+    - [Story Title 3](Story URL 3)
   expected_output: >
-    A fully fledged daily tech briefing report formatted strictly in Markdown.
+    A fully fledged daily tech briefing report formatted strictly in the specified Markdown template, ensuring every source is a clickable Markdown link. Do NOT use H1 (#) tags.
   agent: article_writer
