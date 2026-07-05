@@ -20,7 +20,6 @@ export default function Footer() {
                         rel="noreferrer"
                         className="hover:text-brand transition-colors flex items-center gap-2"
                     >
-                        
                         <span>GitHub</span>
                     </a>
                 </div>

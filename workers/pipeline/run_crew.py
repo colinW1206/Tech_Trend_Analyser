@@ -37,13 +37,24 @@ def generate_daily_brief():
 
     crew_output = Trendanalysercrew().crew().kickoff(inputs=inputs)
 
+    import re
+    raw_markdown = str(crew_output)
+    
+    # Fix missing newlines between heading and bold text
+    cleaned_markdown = re.sub(r'^(## [^\n]+?)\s+\*\*', r'\1\n\n**', raw_markdown, flags=re.MULTILINE)
+    
+    # Fix missing newlines between Sources heading and bullets
+    cleaned_markdown = re.sub(r'^(## Sources?)\s+-\s+', r'\1\n\n- ', cleaned_markdown, flags=re.MULTILINE)
+    
+    # Fix inline bullet points
+    cleaned_markdown = re.sub(r'\)\s+-\s+', r')\n- ', cleaned_markdown)
+
     summary_document = {
         "date": datetime.date.today().isoformat(),
         "summary_title": f"Summary - {datetime.date.today().strftime('%B %d, %Y')}",
-        "summary_markdown": str(crew_output),
+        "summary_markdown": cleaned_markdown,
         "created_at": datetime.datetime.now(datetime.timezone.utc)
     }
-
 
     summaries_collection.insert_one(summary_document)
     print("Summary generated and saved successfully.")

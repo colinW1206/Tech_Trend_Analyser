@@ -21,27 +21,29 @@ write_summary_task:
     You must format the report using EXACTLY the following Markdown structure, without deviation:
 
     ## Overview
-    [A 2-3 sentence executive summary of today's tech climate based on the trends. Begin with "Today's discussion"].
-    
-    ---
+    [A 2-3 sentence executive summary of today's tech climate based on the trends].
     
     ## 1. [Trend Title 1]
     **The Shift:** [One concise sentence summarising the trend]
     
     **Developer Impact:** 
-    [Short paragraph explaining why software engineers should care]
-    
-    ---
+    [Paragraph explaining why software engineers should care]
     
     ## 2. [Trend Title 2]
     ...
     
-    ---
-    
     ## Sources
-    - [Story Title 1](Story URL 1)
-    - [Story Title 2](Story URL 2)
-    - [Story Title 3](Story URL 3)
+    - [Story Title 1](https://example.com)
+    - [Story Title 2](https://example.com)
   expected_output: >
-    A fully fledged daily tech briefing report formatted strictly in the specified Markdown template, ensuring every source is a clickable Markdown link. Do NOT use H1 (#) tags.
+    A fully fledged daily tech briefing report.
+    CRITICAL FORMATTING RULES:
+    1. You MUST use EXACTLY the Markdown structure provided above.
+    2. You MUST place an empty blank line after EVERY heading (##) and after EVERY section. Never place body text on the same line as a heading.
+    3. DO NOT use ANY H1 (`#`) tags. NEVER start the report with `# Daily Tech Briefing` or similar.
+    4. DO NOT include `Volume`, `Issue`, `Date`, or `Topic` preambles at the top.
+    5. DO NOT use horizontal rules (`---`).
+    6. DO NOT use bullet points for "The Shift" or "Developer Impact". They must be paragraphs.
+    7. ALWAYS format the Sources section as a bulleted list of Markdown links EXACTLY like this: `- [Article Title](https://example.com)`. Do not use plain text links.
+    8. Write detailed, in-depth paragraphs. Do not skimp on details. We want a comprehensive, long-form analysis for each trend.
   agent: article_writer
