@@ -1,6 +1,6 @@
 # Tech Trend Analyser
 
-**Live Application:** [http://tech-trend-alb-1324845896.eu-west-1.elb.amazonaws.com](http://tech-trend-alb-1324845896.eu-west-1.elb.amazonaws.com)
+**Live Application:** [https://www.techtrend-ai.com](https://www.techtrend-ai.com)
 
 A Full-Stack Cloud AI application designed to autonomously scrape, analyse, and summarise the latest trends in technology. This project leverages an asynchronous multi-agent pipeline to process news articles and serves the summarised intelligence through a modern, responsive web dashboard.
 

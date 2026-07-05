@@ -91,7 +91,7 @@ export default function Dashboard() {
                         Recent Reports
                     </h1>
                     <div className="flex flex-col space-y-3">
-                        {summaries.map((summary, index) => renderButton(summary, index))}
+                        {summaries.slice(0, 7).map((summary, index) => renderButton(summary, index))}
                     </div>
                 </Card>
 
