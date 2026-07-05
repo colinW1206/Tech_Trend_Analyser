@@ -7,14 +7,20 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def generate_daily_brief():
+def generate_daily_brief(target_date: datetime.date = None, start_time: int = None, end_time: int = None):
     
-    interval = int(time.time()) - (24 * 60 * 60)
+    if target_date is None:
+        target_date = datetime.date.today()
+    if start_time is None:
+        start_time = int(time.time()) - (24 * 60 * 60)
 
     query = {
-        "time": {"$gte": interval},
+        "time": {"$gte": start_time},
         "relevance_score": {"$gte": 7}
     }
+    
+    if end_time is not None:
+        query["time"]["$lt"] = end_time
 
     cursor = stories_collection.find(query).sort("relevance_score", -1).limit(10)
     stories = list(cursor)
@@ -50,8 +56,8 @@ def generate_daily_brief():
     cleaned_markdown = re.sub(r'\)\s+-\s+', r')\n- ', cleaned_markdown)
 
     summary_document = {
-        "date": datetime.date.today().isoformat(),
-        "summary_title": f"Summary - {datetime.date.today().strftime('%B %d, %Y')}",
+        "date": target_date.isoformat(),
+        "summary_title": f"Summary - {target_date.strftime('%B %d, %Y')}",
         "summary_markdown": cleaned_markdown,
         "created_at": datetime.datetime.now(datetime.timezone.utc)
     }
