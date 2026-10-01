@@ -1,6 +1,6 @@
 # Tech Trend Analyser
 
-**Live Application:** [https://www.techtrend-ai.com](https://www.techtrend-ai.com)
+**Live Application:** [https://www.techtrend-ai.com](https://www.techtrend-ai.com) (Edit 01/10/2026 AWS hosted instance retired)
 
 A Full-Stack Cloud AI application designed to autonomously scrape, analyse, and summarise the latest trends in technology. This project leverages an asynchronous multi-agent pipeline to process news articles and serves the summarised intelligence through a modern, responsive web dashboard.
 
